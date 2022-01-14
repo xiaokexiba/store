@@ -27,7 +27,7 @@ public class UserServiceTests {
      * 4、方法的访问修饰符必须是public
      */
     @Test
-    public void reg() {
+    public void register() {
         try {
             User user = new User();
             user.setUsername("tim");
@@ -35,11 +35,17 @@ public class UserServiceTests {
             user.setGender(1);
             user.setPhone("17858802974");
             user.setEmail("lower@tedu.cn");
-            iUserService.reg(user);
+            iUserService.register(user);
             System.out.println("注册成功！");
         } catch (ServiceException e) {
             System.out.println(e.getClass());
             System.out.println(e.getMessage());
         }
+    }
+
+    @Test
+    public void login() {
+        User user = iUserService.login("tim", "123");
+        System.out.println(user);
     }
 }

@@ -142,7 +142,7 @@
 			$("#btn-reg").click(function() {
 				console.log($("#form-reg").serialize());
 				$.ajax({
-					url: "/users/reg",
+					url: "/users/register",
 					type: "POST",
 					data: $("#form-reg").serialize(),
 					dataType: "json",
