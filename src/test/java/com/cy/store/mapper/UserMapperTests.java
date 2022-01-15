@@ -68,4 +68,46 @@ public class UserMapperTests {
             System.out.println(e.getMessage());
         }
     }
+
+    @Test
+    public void updateInfoByUid(){
+        User user = new User();
+        user.setUid(1);
+        user.setPhone("17858802222");
+        user.setEmail("admin@cy.com");
+        user.setGender(1);
+        user.setModifiedUser("系统管理员");
+        user.setModifiedTime(new Date());
+        Integer rows = userMapper.updateInfoByUid(user);
+        System.out.println("rows=" + rows);
+    }
+
+    @Test
+    public void getByUid() {
+        try {
+            Integer uid = 2;
+            User user = iUserService.getByUid(uid);
+            System.out.println(user);
+        } catch (ServiceException e) {
+            System.out.println(e.getClass().getSimpleName());
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @Test
+    public void changeInfo() {
+        try {
+            Integer uid = 2;
+            String username = "数据管理员";
+            User user = new User();
+            user.setPhone("15512328888");
+            user.setEmail("admin03@cy.cn");
+            user.setGender(2);
+            iUserService.changeInfo(uid, username, user);
+            System.out.println("OK.");
+        } catch (ServiceException e) {
+            System.out.println(e.getClass().getSimpleName());
+            System.out.println(e.getMessage());
+        }
+    }
 }

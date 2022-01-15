@@ -67,4 +67,14 @@
         FROM t_user
         WHERE uid = #{uid}
     </select>
+
+    <update id="updateInfoByUid">
+        UPDATE t_user
+        SET phone         = #{phone},
+            email         = #{email},
+            gender        = #{gender},
+            modified_user = #{modifiedUser},
+            modified_time = #{modifiedTime}
+        WHERE uid = #{uid}
+    </update>
 </mapper>

@@ -6,6 +6,7 @@ import com.cy.store.service.ex.InsertException;
 import com.cy.store.service.ex.UsernameDuplicateException;
 import com.cy.store.util.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -61,6 +62,27 @@ public class UserController extends BaseController {
         // 调用业务对象执行修改密码
         iUserService.changePassword(uid, username, oldPassword, newPassword);
         // 返回成功
+        return new JsonResult<Void>(OK);
+    }
+
+    @RequestMapping("get_by_uid")
+    public JsonResult<User> getByUid(HttpSession session) {
+        // 从HttpSession对象中获取uid
+        Integer uid = getUidFromSession(session);
+        // 调用业务对象执行获取数据
+        User data = iUserService.getByUid(uid);
+        // 响应成功和数据
+        return new JsonResult<User>(OK, data);
+    }
+
+    @RequestMapping("change_info")
+    public JsonResult<Void> changeInfo(User user, HttpSession session) {
+        // 从HttpSession对象中获取uid和username
+        Integer uid = getUidFromSession(session);
+        String username = getUsernameFromSession(session);
+        // 调用业务对象执行修改用户资料
+        iUserService.changeInfo(uid, username, user);
+        // 响应成功
         return new JsonResult<Void>(OK);
     }
 }

@@ -34,4 +34,21 @@ public interface IUserService {
      * @param newPassword 新密码
      */
     public void changePassword(Integer uid, String username, String oldPassword, String newPassword);
+
+    /**
+     * 获取当前登入的用户信息
+     *
+     * @param uid 当前登入的用户的uid
+     * @return 当前登入的用户信息
+     */
+    User getByUid(Integer uid);
+
+    /**
+     * 修改用户的资料
+     *
+     * @param uid      当前登入的用户uid
+     * @param username 当前登入的用户名
+     * @param user     用户新的数据
+     */
+    void changeInfo(Integer uid, String username, User user);
 }
