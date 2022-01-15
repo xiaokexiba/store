@@ -49,9 +49,18 @@ public class UserController extends BaseController {
         //登录成功后，将uid和username存入到HttpSession中
         session.setAttribute("uid", data.getUid());
         session.setAttribute("username", data.getUsername());
-        System.out.println(getUidFromSession(session));
-        System.out.println(getUsernameFromSession(session));
         // 将以上返回值和状态码OK封装到响应结果中并返回
         return new JsonResult<User>(OK, data);
+    }
+
+    @RequestMapping("change_password")
+    public JsonResult<Void> changePassword(String oldPassword, String newPassword, HttpSession session) {
+        //调用session.getAttribute("")获取uid和username
+        Integer uid = getUidFromSession(session);
+        String username = getUsernameFromSession(session);
+        // 调用业务对象执行修改密码
+        iUserService.changePassword(uid, username, oldPassword, newPassword);
+        // 返回成功
+        return new JsonResult<Void>(OK);
     }
 }

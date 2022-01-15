@@ -2,6 +2,8 @@ package com.cy.store.mapper;
 
 import com.cy.store.entity.User;
 
+import java.util.Date;
+
 /**
  * 处理用户数据操作的持久层接口
  *
@@ -23,4 +25,24 @@ public interface UserMapper {
      * @return 如果匹配成功就返回匹配的用户数据，如果没有成功就返回null
      */
     User findByUsername(String username);
+
+    /**
+     * 根据UID更改用户密码
+     *
+     * @param uid          用户的id
+     * @param password     新密码
+     * @param modifiedUser 最后的修改人
+     * @param modifiedTime 最后修改的时间
+     * @return 受影响的行数
+     */
+    Integer updatePasswordByUid(Integer uid, String password, String modifiedUser, Date modifiedTime);
+
+    /**
+     * 根据UID查询用户数据
+     *
+     * @param uid 用户的id
+     * @return 匹配的用户数据，没有匹配就返回null
+     */
+    User findByUid(Integer uid);
+
 }
