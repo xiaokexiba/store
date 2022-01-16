@@ -1,6 +1,9 @@
 package com.cy.store.service;
 
 import com.cy.store.entity.User;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.Date;
 
 /**
  * 处理用户数据的业务层接口
@@ -51,4 +54,14 @@ public interface IUserService {
      * @param user     用户新的数据
      */
     void changeInfo(Integer uid, String username, User user);
+
+    /**
+     * 修改用户头像
+     *
+     * @param uid      当前登录的用户的id
+     * @param username 当前登录的用户名
+     * @param avatar   用户的新头像的路径
+     */
+    void changeAvatar(Integer uid, String username, String avatar);
+
 }

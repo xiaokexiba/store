@@ -1,6 +1,7 @@
 package com.cy.store.mapper;
 
 import com.cy.store.entity.User;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
 
@@ -47,9 +48,24 @@ public interface UserMapper {
 
     /**
      * 根据uid更改用户资料
+     *
      * @param user 封装了用户uid和新个人资料的对象
      * @return 受影响的行数
      */
     Integer updateInfoByUid(User user);
+
+    /**
+     * 根据uid更新用户头像
+     *
+     * @param uid          用户的uid
+     * @param avatar       新头像的路径
+     * @param modifiedUser 最后的修改人
+     * @param modifiedTime 修改的时间
+     * @return 受影响的行数
+     */
+    Integer updateAvatarByUid(@Param("uid") Integer uid,
+                              @Param("avatar") String avatar,
+                              @Param("modifiedUser") String modifiedUser,
+                              @Param("modifiedTime") Date modifiedTime);
 
 }

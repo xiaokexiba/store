@@ -220,6 +220,34 @@ public class UserServiceImpl implements IUserService {
         }
     }
 
+    /**
+     * 修改用户头像
+     *
+     * @param uid      当前登录的用户的id
+     * @param username 当前登录的用户名
+     * @param avatar   用户的新头像的路径
+     */
+    @Override
+    public void changeAvatar(Integer uid, String username, String avatar) {
+        // 调用userMapper的findByUid()方法，根据参数uid查询用户数据
+        User result = userMapper.findByUid(uid);
+        // 判断查询结果是否为null
+        if (result == null) {
+            // 是：抛出UserNotFoundException异常
+            throw new UserNotFoundException("用户数据不存在");
+        }
+        // 判断查询结果中的isDelete是否为1
+        if (result.getIsDelete() == 1) {
+            // 是：抛出UserNotFoundException异常
+            throw new UserNotFoundException("用户数据不存在");
+        }
+        Integer rows = userMapper.updateAvatarByUid(uid, avatar, username, new Date());
+        if (rows != 1) {
+            // 是：抛出UpdateException
+            throw new UpdateException("更新用户数据时出现未知错误，请联系系统管理员");
+        }
+    }
+
     private String getMd5Password(String password, String salt) {
         /*
           加密规则：
