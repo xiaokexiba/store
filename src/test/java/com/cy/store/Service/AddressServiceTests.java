@@ -60,4 +60,17 @@ public class AddressServiceTests {
             System.out.println(e.getMessage());
         }
     }
+    @Test
+    public void setDefault() {
+        try {
+            Integer aid = 5;
+            Integer uid = 2;
+            String username = "系统管理员";
+            iAddressService.setDefault(aid, uid, username);
+            System.out.println("OK.");
+        } catch (ServiceException e) {
+            System.out.println(e.getClass().getSimpleName());
+            System.out.println(e.getMessage());
+        }
+    }
 }
