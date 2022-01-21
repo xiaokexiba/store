@@ -7,6 +7,8 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * 处理收货地址的持久层接口
+ *
  * @author xiaoke
  */
 public interface AddressMapper {
